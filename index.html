@@ -106,6 +106,9 @@ function handlePosVel(accel) {
   py += vy * dt + accel.y * dt ** 2 / 2;
   vx += accel.x * dt;
   vy += accel.y * dt;
+  
+  updateFieldIfNotNull('pos_x', px, 2);
+  updateFieldIfNotNull('pos_y', py, 2);
 }
   
 
