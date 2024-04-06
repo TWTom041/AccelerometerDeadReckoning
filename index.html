@@ -105,10 +105,10 @@ function handlePosVel(accel) {
   let dvy = accel.y * dt;
   vx += dvx;
   vy += dvy;
-  if (vx < v_thres && accel.x < a_thres) {
+  if (Math.abs(vx) < v_thres && Math.abs(accel.x) < a_thres) {
     vx = 0;
   }
-  if (vy < v_thres && accel.y < a_thres) {
+  if (Math.abs(vy) < v_thres && Math.abs(accel.y) < a_thres) {
     vx = 0;
   }
   
