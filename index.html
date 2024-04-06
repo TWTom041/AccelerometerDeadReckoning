@@ -37,6 +37,12 @@
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
   <li>Measured Interval: <span id="measured_i">0</span><span> ms</span></li>
 </ul>
+<h4>Dead Reckoning</h4>
+<ul>
+  <li>X: <span id="pos_x">0</span><span> m/s<sup>2</sup></span></li>
+  <li>Y: <span id="pos_y">0</span><span> m/s<sup>2</sup></span></li>
+  <li>Z: <span id="pos_z">0</span><span> m/s<sup>2</sup></span></li>
+</ul>
 
 </div>
 </main>
@@ -72,6 +78,8 @@ function handleMotion(event) {
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
 
   updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+
+  handlePosVel(event.acceleration);
   
 
   if (event.acceleration.x != null) {
@@ -80,14 +88,28 @@ function handleMotion(event) {
     counterElement.innerHTML = eventCount + 1;
 
     updateFieldIfNotNull('measured_i', Date.now()-t0, 2);
-    t0 = Date.now()
   }
 
   incrementEventCount();
 }
 
+function handlePosVel(accel) {
+  if (accel.x == null || accel.y == null) {
+    return null
+  }
+  dt = Date.now() - t0;
+  t0 = Date.now();
+  px += vx * dt + accel.x * dt ** 2 / 2;
+  py += vy * dt + accel.y * dt ** 2 / 2;
+  vx += accel.x * dt;
+  vy += accel.y * dt;
+}
+  
+
+
+let t0, vx, vy, px, py;  // for dead reckoning
+  
 let is_running = false;
-let t0 = Date.now()
 let demo_button = document.getElementById("start_demo");
 demo_button.onclick = function(e) {
   e.preventDefault();
