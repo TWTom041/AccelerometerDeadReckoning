@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Demo</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <style>
       #demo-div {color: lightgrey; border-radius: 0.3rem;}
       #demo-div span, #demo-div #num-observed-events {color: black;}
@@ -36,6 +35,7 @@
   <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>2</sup></span></li>
   <li>Z-axis: <span id="Accelerometer_z">0</span><span> m/s<sup>2</sup></span></li>
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
+  <li>Measured Interval: <span id="measured_i">0</span><span> ms</span></li>
 </ul>
 
 </div>
@@ -72,17 +72,22 @@ function handleMotion(event) {
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
 
   updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+  
 
   if (event.acceleration.x != null) {
     let counterElement = document.getElementById("num-observed-events")
     let eventCount = parseInt(counterElement.innerHTML)
     counterElement.innerHTML = eventCount + 1;
+
+    updateFieldIfNotNull('measured_i', Date.now()-t0, 2);
+    t0 = Date.now()
   }
 
   incrementEventCount();
 }
 
 let is_running = false;
+let t0 = Date.now()
 let demo_button = document.getElementById("start_demo");
 demo_button.onclick = function(e) {
   e.preventDefault();
