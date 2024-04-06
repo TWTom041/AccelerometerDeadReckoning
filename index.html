@@ -112,7 +112,7 @@ function handlePosVel(accel) {
     vx = 0;
   }
   if (Math.abs(vy) < v_thres && Math.abs(accel.y) < a_thres) {
-    vx = 0;
+    vy = 0;
   }
   
   
@@ -129,8 +129,8 @@ vx = 0;
 vy = 0;
 px = 0;
 py = 0;
-v_thres = 0.1;  // 5 cm/s
-a_thres = 0.1;
+v_thres = 0.05;  // 5 cm/s
+a_thres = 0.05;
 t0 = Date.now();
   
 let is_running = false;
