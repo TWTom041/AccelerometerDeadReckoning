@@ -114,6 +114,11 @@ function handlePosVel(accel) {
 
 
 let t0, vx, vy, px, py;  // for dead reckoning
+vx = 0;
+vy = 0;
+px = 0;
+py = 0;
+t0 = Date.now();
   
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
