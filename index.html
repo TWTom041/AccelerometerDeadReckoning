@@ -42,6 +42,9 @@
   <li>X: <span id="pos_x">0</span><span> m</span></li>
   <li>Y: <span id="pos_y">0</span><span> m</span></li>
   <li>Z: <span id="pos_z">0</span><span> m</span></li>
+  <li>Vx: <span id="vel_x">0</span><span> m/s</span></li>
+  <li>Vy: <span id="vel_y">0</span><span> m/s</span></li>
+  <li>Vz: <span id="vel_z">0</span><span> m/s</span></li>
 </ul>
 
 </div>
@@ -113,8 +116,10 @@ function handlePosVel(accel) {
   }
   
   
-  updateFieldIfNotNull('pos_x', px, 2);
-  updateFieldIfNotNull('pos_y', py, 2);
+  updateFieldIfNotNull('pos_x', px, 5);
+  updateFieldIfNotNull('pos_y', py, 5);
+  updateFieldIfNotNull('vel_x', vx, 5);
+  updateFieldIfNotNull('vel_y', vy, 5);
 }
   
 
