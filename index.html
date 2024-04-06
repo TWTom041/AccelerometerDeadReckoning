@@ -97,11 +97,8 @@ function handlePosVel(accel) {
   if (accel.x == null || accel.y == null) {
     return null
   }
-  let dt = Date.now() - t0;
+  let dt = (Date.now() - t0) / 1000;
   t0 = Date.now();
-  if (dt <= 0) {
-    dt = 1;
-  }
   px += vx * dt + accel.x * dt ** 2 / 2;
   py += vy * dt + accel.y * dt ** 2 / 2;
   vx += accel.x * dt;
